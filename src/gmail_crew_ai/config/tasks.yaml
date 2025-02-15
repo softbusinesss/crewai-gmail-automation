@@ -1,0 +1,244 @@
+categorization_task:
+  description: >
+    Get unread emails using the 'get_unread_emails' tool.
+    Categorize each email into one of these specific categories:
+
+    1. SOCIALS:
+       - Social media notifications
+       - LinkedIn messages/connections
+       - Community updates
+
+    1a. GITHUB:  # New separate category
+       - Repository notifications
+       - Security alerts
+       - Workflow status
+       - Pull requests
+       - Issues
+       NOTE: Always add "GITHUB" label to track repository-related items
+
+    2. RECEIPTS_INVOICES:
+       - Purchase confirmations
+       - Payment receipts
+       - Subscription renewals
+       - Billing statements
+
+    3. PROMOTIONS:
+       - Sales announcements
+       - Product offers
+       - Discount codes
+       - Marketing campaigns
+
+    4. NEWSLETTERS:
+       - Industry updates
+       - Daily/weekly digests
+       - Blog subscriptions
+       - Company newsletters
+
+    5. RECRUITMENT:
+       - Job opportunities
+       - Interview requests
+       - Recruiter outreach
+       - Career updates
+
+    6. SPONSORSHIPS:
+       - Partnership offers
+       - Sponsorship requests
+       - Collaboration proposals
+       - Advertising opportunities
+       NOTE: All SPONSORSHIPS are automatically HIGH priority (revenue opportunity)
+
+    7. PERSONAL:
+       - Direct communications
+       - Personal requests
+       - Individual outreach
+       - Non-business matters
+
+    8. EVENT_INVITATIONS:
+       - Webinar invites
+       - Conference announcements
+       - Meetup notifications
+       - Workshop registrations
+
+    9. COLD_EMAIL:
+       - Unsolicited business proposals
+       - Sales pitches
+       - Generic outreach
+       - Mass marketing
+
+    Priority Assignment Rules:
+    1. HIGH Priority (Response within 24 hours):
+       - Security alerts or critical issues
+       - Time-sensitive business opportunities
+       - Direct requests from key contacts
+       - Payment/billing issues
+       - All SPONSORSHIP opportunities
+
+    2. MEDIUM Priority (Response within 48-72 hours):
+       - Non-urgent meeting requests
+       - Project updates requiring feedback
+       - Pull requests and code reviews
+       - Follow-up communications
+       - Recruitment initial contacts
+
+    3. LOW Priority (Handle when convenient):
+       - FYI communications
+       - Newsletter subscriptions
+       - Regular status updates
+       - Marketing communications
+       - Cold outreach
+
+    IMPORTANT: Include the email_id in your report as it will be needed by the organizer.
+    Your final answer should be a detailed report for each email, including:
+    - Email Subject
+    - From
+    - Email ID
+    - Category (from the 9 specific categories above)
+    - Priority (if in categories 1-4)
+    - Reason for categorization
+    - Required Action (if any)
+    - Due Date/Timeline (if applicable)
+
+  expected_output: >
+    A detailed report for each email with specific categorization, priority level, 
+    and clear action items or handling instructions.
+  agent: categorizer
+  output_file: output/categorization_report.txt
+
+organization_task:
+  description: >
+    Based on the categorization report, organize each email using Gmail's priority features.
+    For each email in the report, use the 'organize_email' tool with these rules:
+
+    Label Assignment Rules:
+    1. Priority-based Labels:
+       - HIGH priority: Add "URGENT" label + star
+       - MEDIUM priority: Add "ACTION_NEEDED" label
+       - LOW priority: Use category-specific label
+
+    2. Category-specific Labels:
+       - NEWSLETTERS: "NEWSLETTER"
+       - PROMOTIONS: "PROMO"
+       - PERSONAL: "PERSONAL"
+       - GITHUB: "GITHUB" (always add regardless of priority)
+       - SPONSORSHIPS: "SPONSOR"
+       - RECRUITMENT: "RECRUIT"
+       - COLD_EMAIL: "COLD"
+       - EVENT_INVITATIONS: "EVENT"
+       - RECEIPTS_INVOICES: "RECEIPT"
+
+    3. Label Combinations:
+       - For HIGH priority: Use only "URGENT"
+       - For MEDIUM priority: Use only "ACTION_NEEDED"
+       - For LOW priority: Use category-specific label
+       - Exception: GITHUB always gets its label plus priority label
+
+    Make sure to use the email_id from the categorization report for each email.
+    Your final answer should detail the actions taken for each email, including:
+    - Email Subject
+    - Actions Applied (star, single label)
+    - Result of organization attempt
+  expected_output: >
+    A report of organization actions taken for each email, including stars, labels, and priority status changes.
+  agent: organizer
+  context: [categorization_task]
+  output_file: output/organization_report.txt
+
+response_task:
+  description: >
+    Based on the categorization and organization reports, generate responses ONLY for emails that require action.
+    Only generate responses for emails in these categories when they have HIGH or MEDIUM priority:
+    - PERSONAL
+    - RECRUITMENT
+    - SPONSORSHIPS
+
+    DO NOT create drafts for:
+    - NEWSLETTERS (never needs response)
+    - PROMOTIONS (never needs response)
+    - RECEIPTS_INVOICES (never needs response)
+    - SOCIALS (unless marked HIGH priority)
+    - COLD_EMAIL (unless marked HIGH priority)
+    
+    When a response is needed:
+    1. Response Structure:
+       - Start with a proper greeting using the sender's name
+       - Reference the original email/topic in the first line
+       - Keep paragraphs short (2-3 sentences max)
+       - Use bullet points for multiple items
+       - End with a clear call to action or next step
+
+    2. Response Rules:
+       - For meeting requests:
+         * Thank them for reaching out
+         * Include calendar link: https://bit.ly/talk-with-tony
+         * Suggest they pick a time that works best for them
+       - For urgent matters:
+         * Acknowledge the urgency
+         * Provide immediate next steps or timeline
+         * Be specific about when they can expect full resolution
+       - For general inquiries:
+         * Confirm understanding of their request
+         * Provide clear, concise information
+         * Set expectations for any follow-up needed
+
+    3. Email Format:
+       - Subject: Keep original subject, prepend "Re: " if needed
+       - Greeting: "Hi [Name]," or "Hello [Name],"
+       - Body: Clear paragraphs with spacing
+       - Closing: Use appropriate closing based on context:
+         * Formal: "Best regards,"
+         * Follow-up needed: "Looking forward to your response,"
+         * Meeting scheduled: "Looking forward to our meeting,"
+       - Signature: Always include signature with:
+         * Your name
+
+    4. Thread Handling:
+       - For replies, reference the specific points/questions from the original email
+       - Keep quoted text minimal and relevant
+       - Place your response above any quoted text
+       - Ensure the subject line maintains thread continuity (Re: prefix)
+
+    For all other emails, simply ignore them - do not create "No response needed" drafts.
+    Your final answer should only list emails that received draft responses.
+
+    Response Structure Guidelines:
+    1. Context Awareness:
+       - Reference specific details from the original email
+       - Acknowledge any deadlines or timelines mentioned
+       - Include relevant project/topic names
+       - Reference previous communications if part of a thread
+
+    2. Response Templates by Category:
+       SPONSORSHIPS:
+         - Thank for the opportunity
+         - Show familiarity with their brand/product
+         - Express genuine interest
+         - Ask about budget/requirements
+
+       RECRUITMENT:
+         - Acknowledge the role/company
+         - Reference relevant experience
+         - Show enthusiasm
+         - Ask about next steps
+
+       PERSONAL:
+         - Acknowledge relationship context
+         - Reference shared history/projects
+         - Be specific about action items
+
+    3. Priority-based Response Times:
+       HIGH:
+         - Acknowledge receipt immediately
+         - Provide concrete next steps
+         - Set clear timeline
+
+       MEDIUM:
+         - Thank for patience
+         - Provide thoughtful response
+         - Set realistic expectations
+  expected_output: >
+    A draft email saved to the drafts folder for each email that requires a response, or 
+    "No response needed" for emails to be deleted or ignored. Each draft should follow the 
+    specified structure and formatting guidelines.
+  agent: response_generator
+  context: [categorization_task, organization_task]
+  output_file: output/response_report.txt
