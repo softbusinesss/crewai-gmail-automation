@@ -64,20 +64,20 @@ This project depends on the CrewAI framework for running agent automations.
 
 Create a .env file in the project root with the following environment variables:
 
-# Choose your LLM provider
-# OpenAI (Recommended)
+## Choose your LLM provider
+## OpenAI (Recommended)
 MODEL=openai/gpt-4o-mini
 OPENAI_API_KEY=your_openai_api_key
 
-# Or Gemini
-# MODEL=gemini/gemini-2.0-flash
-# GEMINI_API_KEY=your_gemini_api_key
+## Or Gemini
+## MODEL=gemini/gemini-2.0-flash
+## GEMINI_API_KEY=your_gemini_api_key
 
-# Gmail account credentials
+## Gmail account credentials
 EMAIL_ADDRESS=your_email@gmail.com
 APP_PASSWORD=your_gmail_app_password
 
-# Optional: Slack webhook URL
+## Optional: Slack webhook URL
 SLACK_WEBHOOK_URL=your_slack_webhook_url
 
 🔐 Notes
