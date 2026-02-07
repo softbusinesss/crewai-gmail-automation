@@ -1,4 +1,4 @@
-Gmail Automation with CrewAI 📧✨
+# Gmail Automation with CrewAI 📧✨
 
 Intelligent Gmail Inbox Automation Powered by AI Agents
 
