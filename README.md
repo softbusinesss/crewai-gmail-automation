@@ -1,3 +1,23 @@
+<p align="center"> <a href="https://github.com/softbusinesss/crewai-gmail-automation"> <img src="https://mintlify.s3.us-west-1.amazonaws.com/brightdata/logo/light.svg" width="300" alt="Gmail Automation with CrewAI"> </a> </p>
+Gmail Automation with CrewAI 📧✨
+
+Intelligent Gmail Inbox Automation Powered by AI Agents
+
+<div align="center"> <img src="https://img.shields.io/badge/python‑AI‑automation‑blue"/> <img src="https://img.shields.io/badge/License‑MIT‑blue"/> </div>
+🌟 Overview
+
+Gmail Automation with CrewAI is an AI‑driven system that automatically manages your Gmail inbox using intelligent agents. It categorizes incoming emails, labels and prioritizes them, drafts replies, handles cleanup, and can even notify you on Slack — all powered by CrewAI’s autonomous agent framework.
+
+This project uses IMAP to securely access your Gmail account and apply organizational workflows without downloading mail locally.
+
+📌 Table of Contents
+
+✨ Features
+
+🚀 Installation
+
+⚙️ Configuration
+
 📧 How It Works
 
 ▶️ Usage
