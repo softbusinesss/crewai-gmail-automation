@@ -1,43 +1,8 @@
-<p align="center"> <a href="https://github.com/softbusinesss/crewai-gmail-automation"> <img src="https://mintlify.s3.us-west-1.amazonaws.com/brightdata/logo/light.svg" width="300" alt="Gmail Automation with CrewAI"> </a> </p>
-Gmail Automation with CrewAI ✨
-
-AI‑Powered Email Management & Workflow Automation System
-An intelligent, multi‑agent system that uses CrewAI to automatically categorize, organize, respond to, and clean up your Gmail inbox.
-
-<div align="center"> <img src="https://img.shields.io/badge/python‑AI‑automation‑blue"/> <img src="https://img.shields.io/badge/License‑MIT‑blue"/> </div>
-🌟 Overview
-
-This project is a smart Gmail automation tool leveraging AI agents to:
-
-Categorize incoming emails (newsletters, promotions, personal, etc.)
-
-Assign priority levels (HIGH, MEDIUM, LOW)
-
-Apply Gmail labels & stars
-
-Generate intelligent draft responses
-
-Send notifications to Slack for high‑priority items
-
-Clean up low‑value emails
-
-Maintain thread awareness and email context
-
-Powered by CrewAI’s agent framework, this system helps you automate repetitive inbox tasks and stay on top of important messages.
-
-📌 Table of Contents
-
-✨ Features
-
-🛠 Installation
-
-⚙️ Configuration
-
 📧 How It Works
 
 ▶️ Usage
 
-🔍 Special Features
+🌟 Special Features
 
 🤝 Contributing
 
@@ -45,142 +10,145 @@ Powered by CrewAI’s agent framework, this system helps you automate repetitive
 
 ✨ Features
 
-📋 Email Categorization — Classifies emails by type
+📋 Email Categorization: Classifies emails into types like newsletters, promotions, and personal.
 
-🔔 Priority Assignment — Intelligent scoring of message importance
+🔔 Priority Assignment: Uses rules to assign HIGH/MEDIUM/LOW priority.
 
-🏷️ Smart Organization — Apply Gmail labels & stars based on rules
+🏷️ Smart Labeling: Applies Gmail labels & stars based on content.
 
-💬 AI‑Generated Drafts — Context‑aware reply drafts
+💬 AI Draft Responses: Generates reply drafts for key messages.
 
-📱 Slack Notifications — Alerts for high‑priority messages
+📱 Slack Alerts: Optional notifications for high‑priority emails.
 
-🧹 Cleanup Automation — Delete low‑priority emails with safe rules
+🧹 Inbox Cleanup: Automatically deletes or archives emails based on rules.
 
-🧵 Thread Awareness — Maintains conversation structure
+🧵 Thread Awareness: Maintains context within conversation threads.
 
-🛠 Installation
+🚀 Installation
 
-Clone the repository:
+Clone the repository and install dependencies:
 
 git clone https://github.com/softbusinesss/crewai-gmail-automation.git
 cd crewai-gmail-automation
 
-
-Create and activate a virtual environment:
-
+# Create and activate a virtual environment
 python -m venv .venv
 source .venv/bin/activate   # macOS/Linux
 .\.venv\Scripts\activate    # Windows
 
-
-Install dependencies via CrewAI:
-
+# Install dependencies via CrewAI
 crewai install
+
+
+This project depends on the CrewAI framework for running agent automations.
 
 ⚙️ Configuration
 
-Create a .env file in the project root with:
+Create a .env file in the project root with the following environment variables:
 
-# LLM provider settings
+# Choose your LLM provider
+# OpenAI (Recommended)
 MODEL=openai/gpt-4o-mini
 OPENAI_API_KEY=your_openai_api_key
+
+# Or Gemini
+# MODEL=gemini/gemini-2.0-flash
+# GEMINI_API_KEY=your_gemini_api_key
 
 # Gmail account credentials
 EMAIL_ADDRESS=your_email@gmail.com
 APP_PASSWORD=your_gmail_app_password
 
-# Optional: Slack notifications
+# Optional: Slack webhook URL
 SLACK_WEBHOOK_URL=your_slack_webhook_url
 
+🔐 Notes
 
-💡 Notes:
+Gmail requires an App Password for secure access when 2‑Step Verification is enabled.
 
-Gmail requires 2‑Step Verification and an App Password for IMAP access.
-
-Slack Webhook setup is optional but enables alerting for priority messages.
+Slack Webhooks must be created from your Slack workspace if you want alert notifications.
 
 📧 How It Works
 
-This tool uses IMAP (Secure Mail Access) to connect to your Gmail inbox and perform actions such as:
+This tool uses IMAP to connect securely to your Gmail account:
 
-Fetch unread emails
+Secure SSL Connection to Gmail’s IMAP server.
 
-Categorize and assign labels
+Authenticate with your email and app password.
 
-Generate draft replies using AI
+Mailbox Access to read, label, draft responses, and move messages.
 
-Send Slack alerts for critical messages
+Disconnect Securely after operations complete.
 
-Delete or archive emails based on customizable rules
-
-The connection is secure, and credentials remain local in .env — never shared externally.
+Credentials are stored locally in .env and never shared externally.
 
 ▶️ Usage
 
-Run the automation with:
+Run the automation:
 
 crewai run
 
 
-You’ll be prompted for how many emails to process. The script will then:
+You’ll be prompted to specify how many unread emails to process (e.g., default 5). The system will:
 
 Fetch unread messages
 
-Categorize them
+Categorize by type and priority
 
 Apply labels & stars
 
 Generate draft replies
 
-Send Slack notifications
+Send Slack notifications (if configured)
 
-Clean up older, lower‑priority emails
+Clean up older, low‑priority emails
 
-Empty trash to free space
+Empty Trash to free storage
 
-🔍 Special Features
+🌟 Special Features
 
-🗓️ Smart Cleanup Rules:
+🎯 Smart Cleanup Rules
 
-Delete promotions > 2 days old
+Promotions older than 2 days → Deleted
 
-Delete newsletters > 7 days old (unless high priority)
+Newsletters older than 7 days (unless HIGH priority) → Deleted
 
-Always remove certain categories like Shutterfly
+Shutterfly emails → Always deleted
 
-Archive receipts & important documents instead of deleting
+Receipts / documents → Archived
 
-🎬 YouTube Email Protection:
+📺 YouTube Email Protection
 
-Preserves YouTube‑related notifications and marks them as READ_ONLY
+All YouTube‑related emails are preserved and marked read only — you respond directly on YouTube if needed.
 
-✍️ AI Draft Replies:
+✍️ Smart, Context‑Aware Drafting
 
-Tailored to the message context with proper grammar & formatting
+Generated replies use email context and grammar suited to message tone.
 
-🎨 Creative Slack Alerts:
+📣 Creative Slack Alerts
 
-Fun and informative notifications for urgent emails
+Fun, engaging Slack messages notify you of urgent emails requiring attention.
 
-🧵 Thread Handling:
+🧵 Thread Awareness
 
-Keeps responses and actions context‑aware within threads
+Maintains message thread context when labeling or drafting replies.
 
 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request with:
+Contributions are welcome! Feel free to:
 
-New automation features
+Fix bugs
 
-Bug fixes & improvements
+Improve rules and prioritization logic
 
-Enhanced machine learning rules
+Add new automation behaviors
 
-Updated documentation
+Improve documentation
+
+Submit your changes via Pull Requests on GitHub.
 
 📜 License
 
 This project is licensed under the MIT License — see the LICENSE file for details.
 
-<p align="center"> <a href="https://github.com/softbusinesss/crewai-gmail-automation"> <img src="https://mintlify.s3.us-west-1.amazonaws.com/brightdata/logo/light.svg" width="200" alt="Gmail Automation with CrewAI"> </a> </p>
+<p align="center"> <a href="https://github.com/softbusinesss/crewai-gmail-automation"> <img src="https://mintlify.s3.us‑west‑1.amazonaws.com/brightdata/logo/light.svg" width="200" alt="Gmail Automation with CrewAI"> </a> </p>
